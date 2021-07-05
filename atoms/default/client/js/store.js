@@ -32,13 +32,13 @@ const setDataLoaded = () => {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_SET_SHEETS:
-            // const content = {};
-            // action.payload.content.forEach(v => {
-            //     content[v.key] = v.content;
-            // })
+            const content = {};
+            action.payload.global.forEach(v => {
+                content[v.key] = v.content;
+            })
             
-            // return {...state, sheets: action.payload, content: content };
-            return {...state, sheets: action.payload };
+            return {...state, sheets: action.payload, content: content };
+            // return {...state, sheets: action.payload };
 
             break;
         case ACTION_DATA_LOADED:

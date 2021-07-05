@@ -11,9 +11,10 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Brother from "./Brother";
 import store, { ACTION_SET_SECTIONS, fetchData } from "./store";
 import {SwitchTransition, Transition, TransitionGroup} from "react-transition-group";
-import { Logo} from "./Icons";
+import { Logo, ScrollDown} from "./Icons";
 import {Provider, useSelector, useDispatch} from "react-redux";
 import { useEffect, useRef, useState } from "preact/hooks";
+import {SmoothProvider} from "react-smooth-scrolling";
 
 const assetsPath = "<%= path %>";
 
@@ -22,6 +23,8 @@ gsap.defaults({
     duration:1,
     ease: 'sine.inOut'
 });
+
+const setHtml = (html) => ({__html: html});
 
 const Container = ({children}) => {
     return (
@@ -48,35 +51,104 @@ const Loading = () =>
     </FlexContainer>
 
 const Header = () => {
+    const content = useSelector(s=>s.content);
 
     return (
         <header>
-            <div class="">
+            <div className="">
 
-                <div class="bg"
+                <div className="bg"
                     style={`background-image: linear-gradient(360deg, rgba(0,0,0,0.7) 10%, transparent 40%), url('${assetsPath}/header.jpg');`}>
                     
-                    <div class="client">
-                        <p>Paid for by <a href="#" target="_blank"><img src={`${assetsPath}/logo.png`} width="150"/></a></p>
+                    <div className="client">
+                        <p>Paid for by 
+                            <a href="#" target="_blank">
+                                <Logo />
+                            </a>
+                        </p>
                     </div>
+                        <div>
                     <div class="title">
-                        <h1 class="text-bg"><span data-dyn="headline">“Covid lit a fire under us”: Four businesses bringing new energy into 2021</span></h1>
-                        <div data-dyn="standfirst"></div>
+                            <h1 className="text-bg"><span data-dyn="headline">{content.headline}</span></h1>
+                            <div className="subhead" dangerouslySetInnerHTML={setHtml(content.subhead)}></div>
+                            <ScrollDown />
+                        </div>
                     </div>
                 </div>
             </div>
         </header>        
     )
-}    
+}
 
+const Footer = ({content}) => {
+
+    return (
+        <section className="footer dark-text">
+            <div className="content">
+                <div className="cta" dangerouslySetInnerHTML={setHtml(content.cta)}>
+
+                </div>
+                <div className="disc" dangerouslySetInnerHTML={setHtml(content.disc)}></div>
+                <div className="share">
+                    <SocialBar title={content.shareTitle} />
+                </div>
+            </div>
+        </section>
+    )
+}
+
+const Standfirst = ({content}) => {
+
+    return (
+        <section className="standfirst">
+            <div className="content" >
+                <div className="lines">
+
+                <div className="body" dangerouslySetInnerHTML={setHtml(content.standfirst)}>
+
+                </div>
+                </div>
+                <ScrollDown />
+            </div>
+        </section>
+    )
+}
+const SmoothScroll = ({children}) => {
+    const app = useRef();
+    const [pos, setPos] = useState(window.scrollY);
+    useEffect(()=>{
+        window.addEventListener('scroll', (e) => {
+            e.preventDefault();
+            const dy = pos-window.scrollY;
+            console.log(Math.max(-2100, dy));
+            setPos(window.scrollY);
+            gsap.to(app.current, {duration: 0.5, y: Math.max(-2100, dy), ease: 'sine.out'});
+        });
+    },[])
+    return (
+        <div ref={app}>
+            {children}
+        </div>
+    )
+}
 const Main = () => {
     const loaded = useSelector(s=>s.dataLoaded);
     
     const dispatch = useDispatch();
 
+    const mainRef = useRef();
+
     useEffect(()=>{
         dispatch( fetchData('https://interactive.guim.co.uk/docsdata/1BXjH8uRPPAWgWW_C_ZNkLOEiMljrJioO8ImRyYQGil0.json') );
+
+        // window.addEventListener('resize', resize);
+        // resize();
     },[]);
+    
+    // const resize = () => {
+    //     mainRef.current.style.height = mainRef.current.scollHeight * 0.5 + 'px';
+        
+    // }
 
     const content = useSelector(s=>s.content);
 
@@ -95,12 +167,20 @@ const Main = () => {
                 appear={true}
             >
                 {!loaded && <Loading />}
-                {loaded && 
-                    <main>
+                {loaded &&
+                    <SmoothProvider skew={true}>
+                    {/* // <SmoothScroll> */}
+
+                    
+                    <main ref={mainRef}>
                         {/* <LoopingBgVid /> */}
                         <Header />
+                        <Standfirst content={content} />
                         <Brother />
-                    </main>                    
+                        <Footer content={content} />
+                    </main>
+                    {/* </SmoothScroll> */}
+                    </SmoothProvider>
                 }
             </Transition>            
         </SwitchTransition>

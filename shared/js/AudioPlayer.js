@@ -111,6 +111,17 @@ const AudioPlayer = (props) => {
                         {props.title}
                     </h2>}
             <div className="ap-container">
+            <div className="progress-bar">
+
+                <div 
+                ariaRole="progress"
+                ariaLabel="progress bar"
+                className="track" ref={trackRef} onClick={handleSeek}><div className='current' style={{width: (progress.percent * 100) +'%'}}></div></div>
+                <div className="time d-flex" style="justify-content: space-between; padding: 5px 0;">
+                    <span ariaLabel="current time">{getDuration(progress.currentTime)}</span>
+                    <span ariaLabel="duration">{getDuration(progress.duration)}</span>
+                </div>
+                </div>
                 <div className="controls">
 
                     <button 
@@ -160,17 +171,7 @@ const AudioPlayer = (props) => {
 
 
                 
-                <div className="progress-bar">
-
-                    <div 
-                    ariaRole="progress"
-                    ariaLabel="progress bar"
-                    className="track" ref={trackRef} onClick={handleSeek}><div className='current' style={{width: (progress.percent * 100) +'%'}}></div></div>
-                    <div className="time d-flex" style="justify-content: space-between; padding: 5px 0;">
-                        <span ariaLabel="current time">{getDuration(progress.currentTime)}</span>
-                        <span ariaLabel="duration">{getDuration(progress.duration)}</span>
-                    </div>
-                </div>
+                
                 { props.subs &&
                 <button 
                 ariaRole="button"

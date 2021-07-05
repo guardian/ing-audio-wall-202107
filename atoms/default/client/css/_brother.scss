@@ -4,12 +4,15 @@ figure.element {
 
 body {
   font-family: "TS3 Text Sans";
-  background: #F7F3EB;
+  background: #000;
+  color: white;
+  height: auto !important;
 }
 .list-unstyled {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
 }
 
 .flex-container {
@@ -28,8 +31,10 @@ body {
 #Live {
   margin-top: 5vh;
 }
-
-.text-bg {
+.share {
+  padding-top: 2rem;
+}
+.text-bg1 {
   padding: 1rem 2rem 0 0;
   // margin: 2rem 0;
   color: white;
@@ -74,8 +79,13 @@ body {
 
 h1, h2 {
   line-height: 1.2;
-  span {
-    font-family: "Guardian Headline Bold", serif;
+  font-size: 30/16 + rem;
+  text-decoration: underline;
+  font-family: "Display Sans", serif;
+  text-transform: uppercase;
+
+  @include mq(tablet) {
+    font-size: 45/16 + rem;
   }
 }
 
@@ -110,9 +120,15 @@ q {
 #Glabs {
   // visibility: hidden;
   // opacity: 0;
-  background-color: #F7F3EB;
+  background-color: #000;
 }
 
+.scroll-icon {
+  text-align: center;
+  margin: 2rem 0 0;
+  fill: white;
+  stroke: white;
+}
 header {
   overflow: hidden;
   .flex-container {
@@ -134,12 +150,12 @@ header {
     // width: 120vw;
     // background-attachment: fixed;
     background-size: cover;
-    // background-position: 50% 60%;
+    background-position: 50%;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: space-between;    
-    border: 10px solid #FFB321;
+    // border: 10px solid #FFB321;
     @include mq($until: desktop) {
       background-position: 50%;
     }
@@ -148,19 +164,28 @@ header {
   .title {
     position: relative;
     color: white;
-    margin-left: 10%;
+    // margin-left: 10%;
+    padding: 2rem;
+    max-width: 40rem;
     p {
       padding-bottom: 2rem;
       padding-right: 2rem;
     }
     @include mq(tablet) {
-      max-width: 60%;
-      p  {
-        padding-right: 8rem;
-      }
+      margin: auto;
+      // p  {
+      //   padding-right: 8rem;
+      // }
     }
-    @include mq(desktop) {
-      max-width: 50%;
+    // @include mq(desktop) {
+    //   max-width: 50%;
+    // }
+  }
+
+  .subhead {
+    @include mq(tablet) {
+      padding-top: 2rem;
+      text-align: center;
     }
   }
 
@@ -168,18 +193,35 @@ header {
     display: flex;
     justify-content: flex-end;
     padding: 2rem;
-    color: white;
+    color: black;
     img {
       display: inline-block;
       vertical-align: middle;
       padding-left: 1rem;
     }
+    &>p {
+      display: flex;
+      align-items: center;
+      svg {
+        width: 80px;
+      }
+    }
   }
 }
 
+main  {
+  height: 300px;
+}
+
+
+
 section {
   --panelBgColor: #D4CCFF;
+  background-color: var(--panelBgColor);
 
+  h2 {
+    color: black;
+  }
   @include mq(desktop) {
     display: flex;
     padding: 0;
@@ -193,8 +235,9 @@ section {
     }
   }
   .content {
-    padding: 2rem;
+    padding: 0 1rem 1rem;
     // padding-bottom: 10rem;
+    color: white;
     @include mq(desktop) {
       padding: 5rem 4rem 5rem;
     }
@@ -203,11 +246,19 @@ section {
       font-size: 100%;
       text-decoration: underline;
       font-weight: normal;
+      color: white;
+    }
+  }
+
+  &.dark-text .content {
+    color: black;
+    a {
+      color: black;
     }
   }
 
   .panel .wrap {
-    padding: 0 1rem 2rem 1rem;
+    padding: 0 1rem 0rem 1rem;
   }
 
   @include mq(desktop) {
@@ -234,32 +285,36 @@ section {
 
   .audio {
     position: relative;
-    background: white;
+    // background: white;
     border-radius: 10px;
 
 
     .title {
-      background: #F7F3EB;
-      border-radius: 10px 10px 0 0;
-      padding: 0.5rem 2rem;
+      // background: #F7F3EB;
+      // border-radius: 10px 10px 0 0;
+      text-transform: uppercase;
+      color:black;
+      padding: 0.5rem 0rem;
     }
     .player-body {
-      padding: 0 2rem 2rem;
+      // padding: 0 2rem;
     }
 
     @include mq(tablet) {
       // width: 80%;
-      margin: 0 auto;
+      margin: 2rem auto;
       max-width: 30rem;
     }
 
     .desc p {
-      font-size: 1rem;
+      font-size: 14/16 + rem;
+      color: black;
     }
 
   }
   .bg {
-    background: url("<%= path %>/texture.png") no-repeat 50% var(--panelBgColor);
+    // background: url("<%= path %>/texture.png") no-repeat 50% var(--panelBgColor);
+    background: no-repeat 50% var(--panelBgColor);
     background-size: cover;
     background-attachment: fixed;
     @include mq(desktop) {
@@ -271,10 +326,11 @@ section {
     justify-content: center;
 
     .collage {
-      height: 40vh;
-      @include mq(tablet) {
-        height: 56vh;
-      }
+      // height: 40vh;
+      // @include mq(tablet) {
+      //   height: 56vh;
+      // }
+      padding: 1rem 0;
       position: relative;
       img {
         max-width: 100%;
@@ -283,12 +339,18 @@ section {
         // height: auto;
         width: auto;
       }
-      img:nth-child(n+2) {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate3d(-50%, 0, 2px);
+      .clip {
+        clip-path: circle();
       }
+      .clip+.heading {
+        padding-top: 1rem;
+      }
+      // img:nth-child(n+2) {
+      //   position: absolute;
+      //   top: 0;
+      //   left: 50%;
+      //   transform: translate3d(-50%, 0, 2px);
+      // }
 
       // img:nth-child(3) {
       //   transform-origin: 380px 364px;
@@ -297,6 +359,52 @@ section {
   }
 
 }
+
+$stand-first-color: #FFEAB0;
+.standfirst {
+  padding-top: 2rem;
+  background-color: $stand-first-color;
+  .content {
+    margin: auto;
+    max-width: 40rem;
+    color: black;
+    .lines {
+      &:before, &:after {
+        display: block;
+        content: '';
+        height: 6px;
+        background-color: #000;
+        margin: auto;
+        // width: 60%;
+      }
+      .body {
+        padding: 2rem 0;
+        width: 95%;
+        margin: auto;
+      }
+    }
+  }
+
+  .scroll-icon {
+    fill: black;
+    stroke: black;
+  }
+}
+
+section.footer {
+  background-color: $stand-first-color;
+
+  .disc p {
+    font-size: 10/16 + rem;
+    font-style: italic;
+  }
+
+  .content {
+    max-width: 40rem;
+    margin: auto;
+  }
+}
+
 
   .cta {
     margin-top: 2rem;

@@ -14,8 +14,8 @@ video {
 
 .audio-player {
     position: relative;
-    padding: 2rem 0;
-    background-color: #fff;
+    padding: 1rem 0;
+    // background-color: #fff;
     // padding: 45px 1rem 1rem;
     // background-color: #f1f1f1;
     // align-items: flex-end;
@@ -24,18 +24,19 @@ video {
     .ap-container {
         width: 100%;
         @include mq(tablet) {
-            display: flex;
+            // display: flex;
         }
         // justify-content: center
         align-items: center;
     }
     
     .title {
-        padding-left: 55px;
-        margin-bottom: -6px;
-        @include mq(tablet) {
-            padding-left: 5rem;
-        }
+        color: black;
+        // padding-left: 55px;
+        // margin-bottom: -6px;
+        // @include mq(tablet) {
+        //     padding-left: 5rem;
+        // }
     }
     h1 {
         display: flex;
@@ -136,7 +137,7 @@ video {
         width: 100%;
         position: relative;
         @include mq(tablet) {
-            margin-left: 1rem;
+            // margin-left: 1rem;
         }
         // .title {
         //     position: absolute;
@@ -160,6 +161,7 @@ video {
             position: absolute;
             width: 100%;
             left: 0;
+            color: black;
             @include mq($until: tablet) {
                 font-size: 12px;
 
