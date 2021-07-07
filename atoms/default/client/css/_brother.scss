@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 figure.element {
   margin-top: 0 !important;
 }
@@ -116,7 +119,7 @@ q {
 }
 
 .loading {
-  height: 60vh;
+  height: 100vh;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
@@ -214,7 +217,7 @@ header {
   }
 }
 
-main  {
+.main  {
   height: 300px;
 }
 
@@ -319,6 +322,7 @@ section {
     .desc p {
       font-size: 14/16 + rem;
       color: black;
+      line-height: 1.5;
     }
 
   }
@@ -407,27 +411,47 @@ section.footer {
   .disc p {
     font-size: 10/16 + rem;
     font-style: italic;
+    line-height: 1.5;
   }
 
   .content {
-    max-width: 40rem;
     margin: auto;
+    max-width: 60rem;
+    @include mq($until: desktop ) {
+      padding-top: 1rem;
+
+    }
+  }
+  .cta-wrap {
+    margin: auto;
+    max-width: 40rem;
   }
 }
 
 
-  .cta {
-    margin-top: 2rem;
-  }
 
   #ShareMe {
     ul li {
       display: inline;
     }
-    li:nth-child(3) a {
-      background-color: #767676 !important;
+    // li:nth-child(3) a {
+    //   background-color: #767676 !important;
+    //   svg {
+    //     stroke: white;
+        
+    //   }
+    // }
+
+  }
+
+  .share {
+    a {
+      box-sizing: content-box !important;
+      display: flex !important;
       svg {
-        stroke: white;
+        width: 24px;
+        height: 24px;
+        // padding: 2px;
       }
     }
   }
@@ -450,3 +474,40 @@ section.footer {
     flex-basis: 100%;
     }
   }
+
+  .related-items {
+    margin-top: 2rem;
+    // display: flex;
+    // flex-wrap: wrap;
+    display: grid;
+    grid-gap: 10px;
+    @include mq(desktop) {
+      grid-template-columns: 1fr 1fr;
+    }
+    .related-item {
+      // width: 50%;
+      a {
+        height: 100%;
+        display: flex;
+        padding: 1rem;
+        background: white;
+        align-items: center;
+        transition: border 200ms ease;
+        // transform: rotateZ(0.01deg);
+        border: 0px solid currentColor;
+        &:hover {
+          border-left: 6px solid currentColor;
+        }
+      }
+    }
+  }
+
+.break {
+  margin-top: 2rem;
+  span {
+    display: block;
+    margin: 2px;
+    height: 1px;
+    background: #0000007d;
+  }
+}

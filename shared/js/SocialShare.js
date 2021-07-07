@@ -10,8 +10,14 @@ export default class SocialShare extends Component {
         console.log('SocialBar mount', shareUrl);
         title = this.props.title || '';
 
-    }     
-  componentDidMount() {}
+    }
+
+    componentWillMount() {
+        if (!shareUrl) {
+            shareUrl = window.location.href;
+        }
+    }
+  
 
   render(props, { results = [] }) {
     return (

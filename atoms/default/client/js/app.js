@@ -80,17 +80,23 @@ const Header = () => {
     )
 }
 
-const Footer = ({content}) => {
+const Footer = ({content, related, shareUrl}) => {
 
     return (
         <section className="footer dark-text">
             <div className="content">
-                <div className="cta" dangerouslySetInnerHTML={setHtml(content.cta)}>
+                <div className="cta-wrap">
+                    <div className="cta" dangerouslySetInnerHTML={setHtml(content.cta)} />
+                    <div className="disc" dangerouslySetInnerHTML={setHtml(content.disc)}></div>
 
                 </div>
-                <div className="disc" dangerouslySetInnerHTML={setHtml(content.disc)}></div>
+                
+                <div className="break"><span /><span /><span /><span /></div>
                 <div className="share">
-                    <SocialBar title={content.shareTitle} />
+                    <SocialBar title={content.shareTitle} url={shareUrl} />
+                </div>
+                <div className="related">
+                    <RelatedContent cards={related} />
                 </div>
             </div>
         </section>
@@ -131,6 +137,7 @@ const SmoothScroll = ({children}) => {
         </div>
     )
 }
+
 const Main = () => {
     const loaded = useSelector(s=>s.dataLoaded);
     
@@ -172,13 +179,13 @@ const Main = () => {
                     {/* // <SmoothScroll> */}
 
                     
-                    <main ref={mainRef}>
+                    <div className="main" ref={mainRef}>
                         {/* <LoopingBgVid /> */}
                         <Header />
                         <Standfirst content={content} />
                         <Brother />
-                        <Footer content={content} />
-                    </main>
+                        <Footer content={content} related={store.sheets.related} shareUrl={store.sheets.global[0].shareUrl} />
+                    </div>
                     {/* </SmoothScroll> */}
                     </SmoothProvider>
                 }
