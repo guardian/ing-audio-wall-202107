@@ -25,7 +25,7 @@ const Image = ({panel, animation, startPos, endPos, index}) => {
     // },[]);
     return (
         <div className="clip" style={{overflow:'hidden'}}>
-            <img ref={ref} alt="" src={`<%= path %>/${panel}${index+1}.jpg`} />
+            <img ref={ref} alt="" src={`<%= path %>/${panel}${index+1}.png`} />
         </div>
     )
 }
@@ -122,8 +122,10 @@ const Section = (props) => {
         
     }, []);
 
+    const getBg = ()  => props.bg? {backgroundImage:`url(<%= path %>/${props.bg})`} : {};
+
     return (
-        <section ref={sectionRef} className={`container feature ${props.panel}`}>
+        <section ref={sectionRef} className={`container feature ${props.panel}`} style={getBg()}>
             <div className="panel" ref={panelRef}>
                 <div className="bg">
                     <div className="wrap">
