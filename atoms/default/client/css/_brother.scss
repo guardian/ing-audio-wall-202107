@@ -81,9 +81,14 @@ h1, h2 {
   line-height: 1.2;
   font-size: 30/16 + rem;
   text-decoration: underline;
-  font-family: "Display Sans", serif;
   text-transform: uppercase;
-
+  font-family: "Display Sans", serif;
+  font-weight: 800;
+  
+  span {
+    font-weight: 800;
+    font-family: "Display Sans", serif;
+  }
   @include mq(tablet) {
     font-size: 45/16 + rem;
   }
@@ -218,6 +223,11 @@ main  {
 section {
   --panelBgColor: #D4CCFF;
   background-color: var(--panelBgColor);
+  
+  &.feature {
+    background: url("<%= path %>/texture.png") repeat 50% var(--panelBgColor);
+    background-size: 40%;
+  }
 
   h2 {
     color: black;
@@ -314,7 +324,7 @@ section {
   }
   .bg {
     // background: url("<%= path %>/texture.png") no-repeat 50% var(--panelBgColor);
-    background: no-repeat 50% var(--panelBgColor);
+    // background: no-repeat 50% var(--panelBgColor);
     background-size: cover;
     background-attachment: fixed;
     @include mq(desktop) {

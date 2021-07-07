@@ -46,7 +46,7 @@ const FlexContainer = ({children, className}) => {
 const Loading = () => 
     <FlexContainer className="loading">
         <div style={{width: 300}}>
-            <Logo />
+            <img src={`${assetsPath}/glab_logo.svg`} />
         </div>
     </FlexContainer>
 
