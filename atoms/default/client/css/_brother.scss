@@ -86,10 +86,10 @@ h1, h2 {
   text-decoration: underline;
   text-transform: uppercase;
   font-family: "Display Sans", serif;
-  font-weight: 800;
+  font-weight: 700;
   
   span {
-    font-weight: 800;
+    font-weight: 700;
     font-family: "Display Sans", serif;
   }
   @include mq(tablet) {
