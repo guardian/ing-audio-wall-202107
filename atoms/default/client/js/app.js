@@ -138,24 +138,42 @@ const SmoothScroll = ({children}) => {
     )
 }
 
+const MainBody = ({children}) => {
+    const mainRef = useRef();
+
+    useEffect(()=>{
+        const resize = () => {
+            mainRef.current.style.height = mainRef.current.scrollHeight * 0.5 + 'px';
+            // console.log(mainRef.current.scrollHeight, mainRef.current.scrollHeight * 0.5 + 'px');
+            
+        }
+        window.addEventListener('resize', resize);
+
+        resize();
+
+        return () => window.removeEventListener('resize', resize);
+    },[]);
+
+    return (
+        <div className="main" ref={mainRef}>
+            {children}
+        </div>
+    )
+}
+
 const Main = () => {
     const loaded = useSelector(s=>s.dataLoaded);
     
     const dispatch = useDispatch();
 
-    const mainRef = useRef();
+
 
     useEffect(()=>{
         dispatch( fetchData('https://interactive.guim.co.uk/docsdata/1BXjH8uRPPAWgWW_C_ZNkLOEiMljrJioO8ImRyYQGil0.json') );
-
-        // window.addEventListener('resize', resize);
-        // resize();
     },[]);
+
+
     
-    // const resize = () => {
-    //     mainRef.current.style.height = mainRef.current.scollHeight * 0.5 + 'px';
-        
-    // }
 
     const content = useSelector(s=>s.content);
 
@@ -179,13 +197,13 @@ const Main = () => {
                     {/* // <SmoothScroll> */}
 
                     
-                    <div className="main" ref={mainRef}>
+                    <MainBody>
                         {/* <LoopingBgVid /> */}
                         <Header />
                         <Standfirst content={content} />
                         <Brother />
                         <Footer content={content} related={store.sheets.related} shareUrl={store.sheets.global[0].shareUrl} />
-                    </div>
+                    </MainBody>
                     {/* </SmoothScroll> */}
                     </SmoothProvider>
                 }
