@@ -59,28 +59,28 @@ const Section = (props) => {
 
         // Pin
 
-        // ScrollTrigger.matchMedia({
-        //     "(min-width: 980px)": function() {
-        //         const st = ScrollTrigger.create({
-        //             trigger: panelRef.current,
-        //             start: 'top 0%',
-        //             end: 'bottom 100%',
-        //             scrub: 2.2,
-        //             // markers: true,
-        //             pin: true,
-        //             invalidateOnRefresh: true
+        ScrollTrigger.matchMedia({
+            "(min-width: 980px)": function() {
+                const st = ScrollTrigger.create({
+                    trigger: panelRef.current,
+                    start: 'top 0%',
+                    end: 'bottom 100%',
+                    scrub: 2.2,
+                    // markers: true,
+                    pin: true,
+                    invalidateOnRefresh: true
     
-        //         });
+                });
 
-        //         return () => {
-        //             st.kill();
-        //         }
-        //     }
-        // });
-        // // refresh with depaly to allow for page to settle
-        // setTimeout(()=>{
-        //     ScrollTrigger.refresh();
-        // }, 1500);
+                return () => {
+                    st.kill();
+                }
+            }
+        });
+        // refresh with depaly to allow for page to settle
+        setTimeout(()=>{
+            ScrollTrigger.refresh();
+        }, 1500);
 
         // // Heading animation
         // const h2 = contentRef.current.getElementsByTagName('h2');
