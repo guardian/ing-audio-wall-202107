@@ -62,7 +62,7 @@ const Header = () => {
                     
                     <div className="client">
                         <p>Paid for by 
-                            <a href="#" target="_blank">
+                            <a href={content.logoLink} target="_blank">
                                 <Logo />
                             </a>
                         </p>
@@ -141,18 +141,19 @@ const SmoothScroll = ({children}) => {
 const MainBody = ({children}) => {
     const mainRef = useRef();
 
-    useEffect(()=>{
-        const resize = () => {
-            mainRef.current.style.height = mainRef.current.scrollHeight * 0.5 + 'px';
-            // console.log(mainRef.current.scrollHeight, mainRef.current.scrollHeight * 0.5 + 'px');
-            
-        }
-        window.addEventListener('resize', resize);
+    // useEffect(()=>{
+    //     const resize = () => {
+    //         // mainRef.current.style.height = mainRef.current.scrollHeight * 0.5 + 'px';
+    //         mainRef.current.style.height = document.body.scrollHeight * 0.5 + 'px';
+    //         // console.log(mainRef.current.scrollHeight, mainRef.current.scrollHeight * 0.5 + 'px');
+    //         console.log('size')
+    //     }
+    //     window.addEventListener('resize', resize);
 
-        resize();
+    //     resize();
 
-        return () => window.removeEventListener('resize', resize);
-    },[]);
+    //     return () => window.removeEventListener('resize', resize);
+    // },[]);
 
     return (
         <div className="main" ref={mainRef}>
@@ -193,19 +194,19 @@ const Main = () => {
             >
                 {!loaded && <Loading />}
                 {loaded &&
-                    <SmoothProvider skew={true}>
-                    {/* // <SmoothScroll> */}
 
                     
                     <MainBody>
-                        {/* <LoopingBgVid /> */}
+
+                        
                         <Header />
                         <Standfirst content={content} />
                         <Brother />
                         <Footer content={content} related={store.sheets.related} shareUrl={store.sheets.global[0].shareUrl} />
+                        
+                        
                     </MainBody>
-                    {/* </SmoothScroll> */}
-                    </SmoothProvider>
+                    
                 }
             </Transition>            
         </SwitchTransition>
